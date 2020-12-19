@@ -1,5 +1,5 @@
 <?php
-$db = include '../dbstart.php';
+$db = require_once '../dbstart.php';
 $users = $db->getAll('users');
 ?>
 
@@ -43,6 +43,13 @@ $users = $db->getAll('users');
             <br>
             <a href="/create" class="btn btn-success">Add new user</a>
             <hr>
+
+            <?php if (Flash::exists('success')):?>
+            <div class="alert alert-success">
+                <?php echo Flash::display('success');?>
+            </div>
+            <?php endif;?>
+            
                 <table class="table">
                     <thead class="table-dark">
                         <th>#</th>

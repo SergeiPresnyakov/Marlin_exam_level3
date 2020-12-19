@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +17,13 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <h1>Create new user</h1>
+
+                <?php if (Flash::exists('danger')):?>
+                <div class="alert alert-danger">
+                    <?php echo Flash::display('danger');?>
+                </div>
+                <?php endif;?>
+
                 <form action="/create/newuser" method="post" class="form-control">
                     <label for="username" class="col-form-label">User name</label>
                     <input type="text" name="username" class="form-control" placeholder="User name" id="username">
