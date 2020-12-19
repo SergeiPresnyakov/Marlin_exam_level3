@@ -19,7 +19,7 @@ $users = $db->getAll('users');
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Users</a>
+            <a class="navbar-brand" href="">Users</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -28,7 +28,7 @@ $users = $db->getAll('users');
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">About us</a>
+                        <a class="nav-link active" aria-current="page" href="/about">About us</a>
                     </li>
                 </ul>
             </div>
@@ -49,7 +49,7 @@ $users = $db->getAll('users');
                 <?php echo Flash::display('success');?>
             </div>
             <?php endif;?>
-            
+
                 <table class="table">
                     <thead class="table-dark">
                         <th>#</th>
@@ -64,8 +64,8 @@ $users = $db->getAll('users');
                             <td><?php echo $user['id'];?></td>
                             <td><?php echo $user['username'];?></td>
                             <td><?php echo $user['email'];?></td>
-                            <td><a href=""class="btn btn-warning">Edit</a></td>
-                            <td><a href=""class="btn btn-danger">Delete</a></td>
+                            <td><a href="/edit?id=<?php echo $user['id'];?>"class="btn btn-warning">Edit</a></td>
+                            <td><a href="/delete?id=<?php echo $user['id'];?>"class="btn btn-danger" onclick="return confirm('Delete this user?');">Delete</a></td>
                         </tr>
                     <?php endforeach;?>
                     </tbody>

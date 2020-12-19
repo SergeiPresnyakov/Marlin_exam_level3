@@ -7,9 +7,42 @@ class Validator
     public function __construct()
     {
         // для проверки записи на уникальность нужен доступ к БД
-        $this->db = require_once '../dbstart.php';
+        $config = include '../config.php';
+        $this->db = new QueryBuilder(Connection::make($config['database']));
     }
 
+    /**
+     * Проверка введенных данных в форме на соответствие правилам
+     * required - поле должно быть заполнено
+     * min - введённые данные не должны быть корочем чем это значение
+     * max - не должно быть длиннее чем это значение
+     * matches - данные должны совпадать с данными в указанном поле
+     * unique - эта запись должна быть уникальна в БД
+     * email - данные должны соответствовать формату email
+     * 
+     * Arguments:
+     *      source - Array
+     *      items - Array
+     * 
+     * Returns: Validator object
+     * 
+     * Example:
+     *      $validation = new Validator;
+     *      $validation->check($_POST, [
+     *          'email' => [
+     *              'required' => true,
+     *              'email' => true,
+     *              'unique' => true
+     *          ],
+     *          'password' => [
+     *              'required' => true,
+     *              'min' => 5
+     *          ],
+     *          'password_confirm' => [
+     *              'matches' => 'password'
+     *          ]
+     * ]);
+     */
     public function check($source, $items = [])
     {
         foreach ($items as $item => $rules) {
@@ -72,11 +105,21 @@ class Validator
         return $this;
     }
 
+    /**
+     * Возвращает список ошибок валидации
+     */
     public function errors()
     {
         return $this->errors;
     }
 
+    /**
+     * Возвращает ошибки валидации в виде
+     * маркированного списка (HTML код)
+     * 
+     * Returns:
+     *      String (HTML code)
+     */
     public function errors_ul_html()
     {
         $errors_list = '';
@@ -88,6 +131,11 @@ class Validator
         return '<ul>' . $errors_list . '</ul>';
     }
 
+    /**
+     * Пройдена ли валидация
+     * 
+     * Returns: bool
+     */
     public function passed()
     {
         return $this->passed;

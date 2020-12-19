@@ -14,6 +14,9 @@ return [
         '/' => '../pages/mainpage.php',
         '/about' => '../pages/about.php',
         '/create' => '../pages/create.php',
-        '/create/newuser' => '../create_user.php'
+        '/create/newuser' => '../create_user.php',
+        '/edit' => '../pages/edit.php',
+        '/edit/user' => '../edit_user.php',
+        '/delete' => '../delete_user.php'
     ]
 ];

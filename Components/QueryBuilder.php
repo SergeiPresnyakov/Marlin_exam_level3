@@ -51,7 +51,7 @@ class QueryBuilder
     */
     public function getById($table, $id)
     {
-        return $this->action('SELECT *', $table, ['id', '=', $id]);
+        return $this->action('SELECT *', $table, ['id', '=', $id])[0];
     }
 
     /* 
@@ -157,9 +157,14 @@ class QueryBuilder
                 $sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
                 $query = $this->query($sql, [$value]);
                 
-                // Если целью запроса было получение данных, то возвращаются данные, иначе успешность запроса true|false
-                if ($result = $query->fetchAll(PDO::FETCH_ASSOC) and $action == 'SELECT *') {
-                    return $result;
+                // Если целью запроса было получение данных, то возвращаются данные, иначе успешность запроса true|false 
+                if ($action == 'SELECT *') {
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    if (!empty($result)) {
+                        return $result;
+                    } else {
+                        return false;
+                    }
                 }
                 return $this->queryStatus;
                 
