@@ -138,7 +138,7 @@ class QueryBuilder
     *
     * Example:
     *  $query = new QueryBuilder($pdo);
-    *  $qeury->delete('users', 1);
+    *  $query->delete('users', 1);
     * Удалить из таблицы users запись с id = 1
     */
     public function delete($table, $id)
@@ -190,5 +190,4 @@ class QueryBuilder
         $this->queryStatus = $this->query->execute();
         return $this->query;
     }
-
 }

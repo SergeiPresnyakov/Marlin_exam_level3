@@ -5,7 +5,7 @@ $email = $_POST['email'];
 
 /* Валидация должна срабатывать только после отправки формы */
 if (Input::exists()) {
-    $validation = new Validator;
+    $validation = new Validator($db);
 
     $validation->check($_POST, [
         'username' => [

@@ -4,17 +4,16 @@ class Validator
 {
     private $passed = false, $errors = [], $db = null;
 
-    public function __construct()
+    public function __construct($pdo)
     {
         // для проверки записи на уникальность нужен доступ к БД
-        $config = include '../config.php';
-        $this->db = new QueryBuilder(Connection::make($config['database']));
+        $this->db = $pdo;
     }
 
     /**
      * Проверка введенных данных в форме на соответствие правилам
      * required - поле должно быть заполнено
-     * min - введённые данные не должны быть корочем чем это значение
+     * min - введённые данные не должны быть короче чем это значение
      * max - не должно быть длиннее чем это значение
      * matches - данные должны совпадать с данными в указанном поле
      * unique - эта запись должна быть уникальна в БД

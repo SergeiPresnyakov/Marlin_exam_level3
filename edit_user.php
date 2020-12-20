@@ -12,7 +12,7 @@ $check_params = [
 ];
 
 if (Input::exists()) {
-    $validation = new Validator;
+    $validation = new Validator($db);
     /* Валидация email проводится только если он поменялся */
     if ($current_email != Input::get('email')) {
         $check_params += ['email' => [
