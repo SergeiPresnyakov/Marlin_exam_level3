@@ -160,14 +160,15 @@ class QueryBuilder
                 // Если целью запроса было получение данных, то возвращаются данные, иначе успешность запроса true|false 
                 if ($action == 'SELECT *') {
                     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    
                     if (!empty($result)) {
                         return $result;
                     } else {
                         return false;
                     }
                 }
+
                 return $this->queryStatus;
-                
             }
         }
 
